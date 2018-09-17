@@ -34,6 +34,10 @@ for testduplicate in Name:
 		y=y+1
 	x=x+1
 
+Category=[x for _,x in sorted(zip(Name,Category))]
+Family=[x for _,x in sorted(zip(Name,Family))]
+Name=sorted(Name)
+
 TopTable=list()
 Spriga = dict()
 Sprigb = dict()
@@ -112,15 +116,11 @@ for row in reader1:
 for name1 in Name:
 	countname=0
 	for name2 in Name:
-		rownum=1
-		for read_name1 in comp_names:
-			colnum=0
-			for read_name2 in comp_names:
-				if name1==read_name1 and name2==read_name2:
-					if compatibility[rownum][colnum]<>"":
-						compatibilitymatrix[name1][countname]=compatibility[rownum][colnum]				
-				colnum+=1
-			rownum+=1
+		if name1 in comp_names and name2 in comp_names:
+			x=comp_names.index(name1)
+			y=comp_names.index(name2)
+			if compatibility[x+1][y]<>"":
+				compatibilitymatrix[name1][countname]=compatibility[x+1][y]	
 		countname+=1
 
 
@@ -262,7 +262,7 @@ print(" "+TopTable[25]+" "+Sprigb[8][0]+" "+Sprigb[8][1]+" "+Sprigb[8][2]+" "+Sp
 print(" "+TopTable[26]+" \n")
 
 #XXXXXXXXXX
-#XXXXXXXXXX
+##XXXXXXXXXX
 #X
 #XXXXXXXXXX
 #XXXXXXXXXX
