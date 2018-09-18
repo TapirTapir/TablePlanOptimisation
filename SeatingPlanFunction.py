@@ -6,7 +6,7 @@ import re
 def generate_score(TopTable, Spriga, Sprigb, Name, compatibilitymatrix):
 	Best_score=0
 	for TestPlace in range(1,188):
-		if TestPlace < 27:
+		if TestPlace < 27 and TestPlace!=13 and TestPlace!=14:
 			if TopTable[TestPlace]!="X":
 				if TestPlace<26:
 					if TopTable[TestPlace+1]!="X":
@@ -61,11 +61,10 @@ def generate_score(TopTable, Spriga, Sprigb, Name, compatibilitymatrix):
 
 def find_swap(TopTable, Spriga, Sprigb):
 	TestPlace = random.randint(1,188)
-	while TestPlace == 27:
+	while TestPlace == 27 or (TestPlace>10 and TestPlace<=16):
 		TestPlace = random.randint(1,188)
-	#print TestPlace
 	Swap_a={}
-	if TestPlace < 27:
+	if (TestPlace < 27 and TestPlace >16) or TestPlace<=10 :
 		Swap_a["name"]=TopTable[TestPlace]
 		Swap_a["table"] ="TT"
 		Swap_a["place"] = TestPlace

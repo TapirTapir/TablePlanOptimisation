@@ -74,10 +74,21 @@ for i in range(0,9):
 		Spriga[i][j]="X"
 		Sprigb[i][j]="X"
 
+TopTable[11]="Mike Davies"
+TopTable[12]="Lorna Davies"
+TopTable[13]="Bride (Ellie)"
+TopTable[14]="Groom (Stewart)"
+TopTable[15]="Ron Haugh"
+TopTable[16]="Lin Martin-Haugh"
+parents=['Mike Davies','Lorna Davies','Ron Haugh', 'Lin Martin-Haugh']
+
 for name in Name:
 	FoundPlace= False
 	while FoundPlace==False:
 		TestPlace = random.randint(1,188)
+		if name in parents:
+			FoundPlace= True
+			break
 		if TestPlace < 27:
 			if TopTable[TestPlace]=="X":	
 				TopTable[TestPlace] = name
@@ -97,6 +108,8 @@ for name in Name:
 				if Sprigb[SprigNum][TableSide-9]=="X":
 					Sprigb[SprigNum][TableSide-9]=name
 					FoundPlace= True
+
+
 
 f = open("comp_matrix.csv", 'rb')
 reader1=csv.reader(f, delimiter="\t")
@@ -150,7 +163,7 @@ parent_a_score = generate_score(TopTable, Spriga, Sprigb, Name, compatibilitymat
 #print TopTable
 print parent_a_score			
 
-for Swaps in range(1,500):
+for Swaps in range(1,1000):
 	
 #	print("Swaps = "+str(Swaps))
 	
