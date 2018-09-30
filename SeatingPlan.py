@@ -74,40 +74,6 @@ for i in range(0,9):
 		Spriga[i][j]="X"
 		Sprigb[i][j]="X"
 
-TopTable[11]="Mike Davies"
-TopTable[12]="Lorna Davies"
-TopTable[13]="Bride (Ellie)"
-TopTable[14]="Groom (Stewart)"
-TopTable[15]="Ron Haugh"
-TopTable[16]="Lin Martin-Haugh"
-parents=['Mike Davies','Lorna Davies','Ron Haugh', 'Lin Martin-Haugh']
-
-for name in Name:
-	FoundPlace= False
-	while FoundPlace==False:
-		TestPlace = random.randint(1,188)
-		if name in parents:
-			FoundPlace= True
-			break
-		if TestPlace < 27:
-			if TopTable[TestPlace]=="X":	
-				TopTable[TestPlace] = name
-				FoundPlace= True
-		if TestPlace > 27:
-			SprigNum = round((TestPlace-27)/18)
-			TableSide=(TestPlace-27)%18
-			if TableSide<9:
-				 side="a" 
-			else: 
-				side="b"
-			if side=="a":
-				if Spriga[SprigNum][TableSide]=="X":
-					Spriga[SprigNum][TableSide]=name
-					FoundPlace= True
-			if side=="b":
-				if Sprigb[SprigNum][TableSide-9]=="X":
-					Sprigb[SprigNum][TableSide-9]=name
-					FoundPlace= True
 
 
 
@@ -154,6 +120,132 @@ with open("comp_matrix.csv", "wb") as outfile:
 	writer.writerow(keys)
 	writer.writerows(zip(*[compatibilitymatrix[key] for key in keys]))
 
+TopTable[11]="Mike Davies"
+TopTable[12]="Lorna Davies"
+TopTable[13]="Bride (Ellie)"
+TopTable[14]="Groom (Stewart)"
+TopTable[15]="Ron Haugh"
+TopTable[16]="Lin Martin-Haugh"
+hasplace=['Mike Davies','Lorna Davies','Ron Haugh', 'Lin Martin-Haugh']
+
+
+for name in Name:
+	FoundPlace= False
+	x=comp_names.index(name)
+	closepeoplenames=[]
+	if "50" in compatibilitymatrix[Name[x]]:
+		closepeople = list(i for i, e in enumerate(compatibilitymatrix[Name[x]]) if e=="50")
+		for i in closepeople:
+			closepeoplenames.append(comp_names[i])
+	TestPlace=0	
+	while FoundPlace==False:
+		TestPlace = TestPlace+1
+		if name in hasplace:
+			FoundPlace= True
+			break
+		if TestPlace < 27:
+			if TopTable[TestPlace]=="X" and len(closepeoplenames)==0:
+				TopTable[TestPlace] = name
+				FoundPlace= True
+			if len(closepeoplenames)==1 and TestPlace<26:
+				if TopTable[TestPlace]=="X" and TopTable[TestPlace+1]=="X":
+					TopTable[TestPlace]=name
+					TopTable[TestPlace+1]=closepeoplenames[0]
+					hasplace.append(closepeoplenames[0])
+					FoundPlace=True
+			if len(closepeoplenames)==2 and TestPlace<26 and TestPlace>0:
+				if TopTable[TestPlace]=="X" and TopTable[TestPlace+1]=="X" and TopTable[TestPlace-1]=="X":
+					TopTable[TestPlace]=name
+					TopTable[TestPlace+1]=closepeoplenames[0]
+					TopTable[TestPlace-1]=closepeoplenames[1]
+					hasplace.append(closepeoplenames[0])
+					hasplace.append(closepeoplenames[1])
+					FoundPlace=True
+			if len(closepeoplenames)==3 and TestPlace<25 and TestPlace>0:
+				if TopTable[TestPlace]=="X" and TopTable[TestPlace+1]=="X" and TopTable[TestPlace+2]=="X" and TopTable[TestPlace-1]=="X":
+					TopTable[TestPlace]=name
+					TopTable[TestPlace+1]=closepeoplenames[0]
+					TopTable[TestPlace-1]=closepeoplenames[1]
+					TopTable[TestPlace+2]=closepeoplenames[2]
+					hasplace.append(closepeoplenames[0])
+					hasplace.append(closepeoplenames[1])
+					hasplace.append(closepeoplenames[2])
+					FoundPlace=True
+		if TestPlace > 27:
+			SprigNum = round((TestPlace-27)/18)
+			TableSide=(TestPlace-27)%18
+			if TableSide<9:
+				 side="a" 
+			else: 
+				side="b"
+			if side=="a":
+				if Spriga[SprigNum][TableSide]=="X" and len(closepeoplenames)==0:
+					Spriga[SprigNum][TableSide]=name
+					FoundPlace= True
+				if len(closepeoplenames)==1 and TableSide<8:
+					if Spriga[SprigNum][TableSide]=="X" and Spriga[SprigNum][TableSide+1]=="X":
+						Spriga[SprigNum][TableSide]=name
+						Spriga[SprigNum][TableSide+1]=closepeoplenames[0]
+						hasplace.append(closepeoplenames[0])
+						FoundPlace=True
+				if len(closepeoplenames)==2 and TableSide<8 and TableSide>0:
+					if Spriga[SprigNum][TableSide]=="X" and Spriga[SprigNum][TableSide+1]=="X" and Spriga[SprigNum][TableSide-1]=="X":
+						Spriga[SprigNum][TableSide]=name
+						Spriga[SprigNum][TableSide+1]=closepeoplenames[0]
+						Spriga[SprigNum][TableSide-1]=closepeoplenames[1]
+						hasplace.append(closepeoplenames[0])
+						hasplace.append(closepeoplenames[1])
+						FoundPlace=True
+				if len(closepeoplenames)==3 and TableSide<7 and TableSide>0:
+					if Spriga[SprigNum][TableSide]=="X" and Spriga[SprigNum][TableSide+1]=="X" and Spriga[SprigNum][TableSide+2]=="X" and Spriga[SprigNum][TableSide-1]=="X":
+						Spriga[SprigNum][TableSide]=name
+						Spriga[SprigNum][TableSide+1]=closepeoplenames[0]
+						Spriga[SprigNum][TableSide-1]=closepeoplenames[1]
+						Spriga[SprigNum][TableSide+2]=closepeoplenames[2]
+						hasplace.append(closepeoplenames[0])
+						hasplace.append(closepeoplenames[1])
+						hasplace.append(closepeoplenames[2])
+						FoundPlace=True
+				elif len(closepeoplenames)==1:
+					if Spriga[SprigNum][TableSide]=="X" and Sprigb[SprigNum][TableSide]=="X":
+						Spriga[SprigNum][TableSide]=name
+						Sprigb[SprigNum][TableSide]=closepeoplenames[0]
+						hasplace.append(closepeoplenames[0])
+						FoundPlace=True
+			if side=="b":
+				if Sprigb[SprigNum][TableSide-9]=="X" and len(closepeoplenames)==0:
+					Sprigb[SprigNum][TableSide-9]=name
+					FoundPlace= True
+				if len(closepeoplenames)==1 and TableSide-9<8:
+					if Sprigb[SprigNum][TableSide-9]=="X" and Sprigb[SprigNum][TableSide-9+1]=="X":
+						Sprigb[SprigNum][TableSide-9]=name
+						Sprigb[SprigNum][TableSide-9+1]=closepeoplenames[0]
+						hasplace.append(closepeoplenames[0])
+						FoundPlace=True
+				if len(closepeoplenames)==2 and TableSide-9<8 and TableSide-9>0:
+					if Sprigb[SprigNum][TableSide-9]=="X" and Sprigb[SprigNum][TableSide-9+1]=="X" and Sprigb[SprigNum][TableSide-9-1]:
+						Sprigb[SprigNum][TableSide-9]=name
+						Sprigb[SprigNum][TableSide-9+1]=closepeoplenames[0]
+						Sprigb[SprigNum][TableSide-9-1]=closepeoplenames[1]
+						hasplace.append(closepeoplenames[0])
+						hasplace.append(closepeoplenames[1])
+						FoundPlace=True
+				if len(closepeoplenames)==3 and TableSide-9<7 and TableSide-9>0:
+					if Sprigb[SprigNum][TableSide-9]=="X" and Sprigb[SprigNum][TableSide-9+1]=="X" and Sprigb[SprigNum][TableSide-9+2]=="X" and Sprigb[SprigNum][TableSide-9-1]:
+						Sprigb[SprigNum][TableSide-9]=name
+						Sprigb[SprigNum][TableSide-9+1]=closepeoplenames[0]
+						Sprigb[SprigNum][TableSide-9-1]=closepeoplenames[1]
+						Sprigb[SprigNum][TableSide-9+2]=closepeoplenames[2]
+						hasplace.append(closepeoplenames[0])
+						hasplace.append(closepeoplenames[1])
+						hasplace.append(closepeoplenames[2])
+						FoundPlace=True
+				elif len(closepeoplenames)==1:
+					if Spriga[SprigNum][TableSide-9]=="X" and Sprigb[SprigNum][TableSide-9]=="X":
+						Spriga[SprigNum][TableSide-9]=name
+						Sprigb[SprigNum][TableSide-9]=closepeoplenames[0]
+						hasplace.append(closepeoplenames[0])
+						FoundPlace=True
 
 Best_score=0
 
@@ -163,7 +255,7 @@ parent_a_score = generate_score(TopTable, Spriga, Sprigb, Name, compatibilitymat
 #print TopTable
 print parent_a_score			
 
-for Swaps in range(1,1000):
+for Swaps in range(1,500):
 	
 #	print("Swaps = "+str(Swaps))
 	
@@ -209,6 +301,9 @@ for Swaps in range(1,1000):
 	parent_b_score = generate_score(TopTable, Spriga, Sprigb, Name, compatibilitymatrix)
 #	print "parent b"
 #	print parent_b_score
+	
+	if parent_b_score>parent_a_score:
+		print Swaps, parent_b_score
 
 	if parent_a_score>parent_b_score:
 		if Swap_a["table"]=="TT":
