@@ -5,6 +5,7 @@ import re
 
 from SeatingPlanFunction import generate_score
 from SeatingPlanFunction import find_swap
+from SeatingPlanFunction import find_second_swap
 
 f = open("Desktop/Guest_list_test.csv", 'rb')
 reader=csv.reader(f, delimiter="\t")
@@ -262,8 +263,8 @@ for Swaps in range(1,500):
 	parent_a_score = generate_score(TopTable, Spriga, Sprigb, Name, compatibilitymatrix)
 #	print "parent a"
 #	print parent_a_score
-	Swap_a=find_swap(TopTable, Spriga, Sprigb)
-	Swap_b=find_swap(TopTable, Spriga, Sprigb)
+	Swap_a=find_swap(TopTable, Spriga, Sprigb, Name, compatibilitymatrix)
+	Swap_b=find_second_swap(TopTable, Spriga, Sprigb, Name, compatibilitymatrix, Swap_a)
 
 #	print Swap_a, Swap_b
 
