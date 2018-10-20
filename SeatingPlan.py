@@ -256,91 +256,105 @@ parent_a_score = generate_score(TopTable, Spriga, Sprigb, Name, compatibilitymat
 #print TopTable
 print parent_a_score			
 
-for Swaps in range(1,500):
+logfile= open("logfile.log", "w")
+for Swaps in range(1,10000):
 	
 #	print("Swaps = "+str(Swaps))
 	
 	parent_a_score = generate_score(TopTable, Spriga, Sprigb, Name, compatibilitymatrix)
 #	print "parent a"
 #	print parent_a_score
-	Swap_a=find_swap(TopTable, Spriga, Sprigb, Name, compatibilitymatrix)
-	Swap_b=find_second_swap(TopTable, Spriga, Sprigb, Name, compatibilitymatrix, Swap_a)
+	print "NEXT SWAP"
+	found_swap=False
+	while found_swap==False:
+		Swap_a=find_swap(TopTable, Spriga, Sprigb, Name, compatibilitymatrix)
+		Swap_b=find_second_swap(TopTable, Spriga, Sprigb, Name, compatibilitymatrix, Swap_a)
+		if Swap_a["name"][0] not in Swap_b["name"]:
+			found_swap=True
 
-#	print Swap_a, Swap_b
-
-	if Swap_a["table"]=="TT":
-#		print "top table"
-#		print TopTable
-		TopTable[Swap_a["place"]]=Swap_b["name"]
-#		print TopTable
-	elif Swap_a["tableside"]=="a":
-#		print Swap_a["table"]
-#		print Spriga[Swap_a["table"]]
-		Spriga[Swap_a["table"]][Swap_a["place"]]=Swap_b["name"]
-#		print Spriga[Swap_a["table"]]
-	elif Swap_a["tableside"]=="b":
-#		print Swap_a["table"]
-#		print Sprigb[Swap_a["table"]]
-		Sprigb[Swap_a["table"]][Swap_a["place"]-9]=Swap_b["name"]
-#		print Sprigb[Swap_a["table"]]	
-	if Swap_b["table"]=="TT":
-#		print "top table"
-#		print TopTable
-		TopTable[Swap_b["place"]]=Swap_a["name"]
-#		print TopTable
-	elif Swap_b["tableside"]=="a":
-#		print Swap_b["table"]
-#		print Spriga[Swap_b["table"]]
-		Spriga[Swap_b["table"]][Swap_b["place"]]=Swap_a["name"]
-#		print Spriga[Swap_b["table"]]
-	elif Swap_b["tableside"]=="b":
-#		print Swap_b["table"]
-#		print Sprigb[Swap_b["table"]]
-		Sprigb[Swap_b["table"]][Swap_b["place"]-9]=Swap_a["name"]
-#		print Sprigb[Swap_b["table"]]
-	
+	print Swap_a, Swap_b
+	for i in range(0, len(Swap_a["table"])):
+		print "Swapping", i
+		if Swap_a["table"][i]=="TT":
+			print "top table"
+			print TopTable
+			TopTable[Swap_a["place"][i]]=Swap_b["name"][i]
+			print TopTable
+		elif Swap_a["tableside"][i]=="a":
+			print Swap_a["table"]
+			print Spriga[Swap_a["table"][i]]
+			Spriga[Swap_a["table"][i]][Swap_a["place"][i]]=Swap_b["name"][i]
+			print Spriga[Swap_a["table"][i]]
+		elif Swap_a["tableside"][i]=="b":
+			print Swap_a["table"]
+			print Sprigb[Swap_a["table"][i]]
+			Sprigb[Swap_a["table"][i]][Swap_a["place"][i]-9]=Swap_b["name"][i]
+			print Sprigb[Swap_a["table"][i]]	
+		if Swap_b["table"][i]=="TT":
+			print "top table"
+			print TopTable, Swap_b["place"][i]
+			TopTable[Swap_b["place"][i]]=Swap_a["name"][i]
+			print TopTable
+		elif Swap_b["tableside"][i]=="a":
+			print Swap_b["table"]
+			print Spriga[Swap_b["table"][i]]
+			Spriga[Swap_b["table"][i]][Swap_b["place"][i]]=Swap_a["name"][i]
+			print Spriga[Swap_b["table"][i]]
+		elif Swap_b["tableside"][i]=="b":
+			print Swap_b["table"]
+			print Sprigb[Swap_b["table"][i]]
+			Sprigb[Swap_b["table"][i]][Swap_b["place"][i]-9]=Swap_a["name"][i]
+			print Sprigb[Swap_b["table"][i]]
+		
 	parent_b_score = generate_score(TopTable, Spriga, Sprigb, Name, compatibilitymatrix)
-#	print "parent b"
-#	print parent_b_score
+	print "parent b"
+	print parent_b_score
+	logfile.write("test arrangement score "+str(parent_b_score)+"\n")
 	
 	if parent_b_score>parent_a_score:
 		print Swaps, parent_b_score
 
 	if parent_a_score>parent_b_score:
-		if Swap_a["table"]=="TT":
-#			print "top table"
-#			print TopTable
-			TopTable[Swap_a["place"]]=Swap_a["name"]
-#			print TopTable
-		elif Swap_a["tableside"]=="a":
-#			print Swap_a["table"]
-#			print Spriga[Swap_a["table"]]
-			Spriga[Swap_a["table"]][Swap_a["place"]]=Swap_a["name"]
-#			print Spriga[Swap_a["table"]]
-		elif Swap_a["tableside"]=="b":
-#			print Swap_a["table"]
-#			print Sprigb[Swap_a["table"]]
-			Sprigb[Swap_a["table"]][Swap_a["place"]-9]=Swap_a["name"]
-#			print Sprigb[Swap_a["table"]]
-		if Swap_b["table"]=="TT":
-#			print "top table"
-#			print TopTable
-			TopTable[Swap_b["place"]]=Swap_b["name"]
-#			print TopTable
-		elif Swap_b["tableside"]=="a":
-#			print Swap_b["table"]
-#			print Spriga[Swap_b["table"]]
-			Spriga[Swap_b["table"]][Swap_b["place"]]=Swap_b["name"]
-#			print Spriga[Swap_b["table"]]
-		elif Swap_b["tableside"]=="b":
-#			print Swap_b["table"]
-#			print Sprigb[Swap_b["table"]]
-			Sprigb[Swap_b["table"]][Swap_b["place"]-9]=Swap_b["name"]
-#			print Sprigb[Swap_b["table"]]
+		print "KEEP SWAP a=", parent_a_score, "  b=", parent_b_score, i
+		logfile.write("a score is better "+str(parent_a_score)+"\n")
+	
+		for i in range(0, len(Swap_a["table"])):
+			if Swap_a["table"][i]=="TT":
+				print "top table"
+				print TopTable
+				TopTable[Swap_a["place"][i]]=Swap_a["name"][i]
+				print TopTable
+			elif Swap_a["tableside"][i]=="a":
+				print Swap_a["table"][i]
+				print Spriga[Swap_a["table"][i]]
+				Spriga[Swap_a["table"][i]][Swap_a["place"][i]]=Swap_a["name"][i]
+				print Spriga[Swap_a["table"][i]]
+			elif Swap_a["tableside"][i]=="b":
+				print Swap_a["table"][i]
+				print Sprigb[Swap_a["table"][i]]
+				Sprigb[Swap_a["table"][i]][Swap_a["place"][i]-9]=Swap_a["name"][i]
+				print Sprigb[Swap_a["table"][i]]
+			if Swap_b["table"][i]=="TT":
+				print "top table"
+				print TopTable
+				TopTable[Swap_b["place"][i]]=Swap_b["name"][i]
+				print TopTable
+			elif Swap_b["tableside"][i]=="a":
+				print Swap_b["table"][i]
+				print Spriga[Swap_b["table"][i]]
+				Spriga[Swap_b["table"][i]][Swap_b["place"][i]]=Swap_b["name"][i]
+				print Spriga[Swap_b["table"][i]]
+			elif Swap_b["tableside"][i]=="b":
+				print Swap_b["table"][i]
+				print Sprigb[Swap_b["table"][i]]
+				Sprigb[Swap_b["table"][i]][Swap_b["place"][i]-9]=Swap_b["name"][i]
+				print Sprigb[Swap_b["table"][i]]
 
 parent_a_score = generate_score(TopTable, Spriga, Sprigb, Name, compatibilitymatrix)
 print "Final score = "
 print parent_a_score
+logfile.write("final score "+str(parent_a_score)+"\n")
+logfile.close()
 
 print(" "+TopTable[0]+" "+Spriga[0][0]+" "+Spriga[0][1]+" "+Spriga[0][2]+" "+Spriga[0][3]+" "+Spriga[0][4]+" "+Spriga[0][5]+" "+Spriga[0][6]+" "+Spriga[0][7]+" "+Spriga[0][8]+" \n")
 print(" "+TopTable[1]+" "+Sprigb[0][0]+" "+Sprigb[0][1]+" "+Sprigb[0][2]+" "+Sprigb[0][3]+" "+Sprigb[0][4]+" "+Sprigb[0][5]+" "+Sprigb[0][6]+" "+Sprigb[0][7]+" "+Sprigb[0][8]+" \n")
