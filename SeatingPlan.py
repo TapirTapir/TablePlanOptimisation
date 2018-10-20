@@ -257,7 +257,7 @@ parent_a_score = generate_score(TopTable, Spriga, Sprigb, Name, compatibilitymat
 print parent_a_score			
 
 logfile= open("logfile.log", "w")
-for Swaps in range(1,10000):
+for Swaps in range(1,20000):
 	
 #	print("Swaps = "+str(Swaps))
 	
@@ -309,10 +309,10 @@ for Swaps in range(1,10000):
 	parent_b_score = generate_score(TopTable, Spriga, Sprigb, Name, compatibilitymatrix)
 	print "parent b"
 	print parent_b_score
-	logfile.write("test arrangement score "+str(parent_b_score)+"\n")
 	
 	if parent_b_score>parent_a_score:
 		print Swaps, parent_b_score
+		logfile.write(str(Swaps)+","+str(parent_a_score)+"\n")
 
 	if parent_a_score>parent_b_score:
 		print "KEEP SWAP a=", parent_a_score, "  b=", parent_b_score, i

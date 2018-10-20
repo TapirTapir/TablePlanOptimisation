@@ -413,6 +413,15 @@ def find_second_swap(TopTable, Spriga, Sprigb, Name, compatibilitymatrix, Swap_1
 										Swap_a["tableside"].append(tableside)
 										Swap_a["place"].append(Min_swap_a-1)
 										added=added+1
+								elif Min_swap_a-2-9>=0 and Spriga[table][Min_swap_a-1-9]=="X" and Sprigb[table][Min_swap_a-1-9]!="X" and Sprigb[table][Min_swap_a-2-9]!="X":
+									name_num_b=Name.index(Sprigb[table][Min_swap_a-2-9])
+									if int(compatibilitymatrix[Sprigb[table][Min_swap_a-1-9]][name_num_b])!=50:
+										print "2nd", Spriga[table][Min_swap_a-2-9]
+										Swap_a["name"].append(Sprigb[table][Min_swap_a-1-9])
+										Swap_a["table"].append(table)
+										Swap_a["tableside"].append(tableside)
+										Swap_a["place"].append(Min_swap_a-1)
+										added=added+1
 								else:
 									print "2nd", Spriga[table][Min_swap_a-1-9]
 									Swap_a["name"].append(Sprigb[table][Min_swap_a-1-9])
