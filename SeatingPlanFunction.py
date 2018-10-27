@@ -248,7 +248,7 @@ def find_second_swap(TopTable, Spriga, Sprigb, Name, compatibilitymatrix, Swap_1
 			else: 
 				found_all_matches=True 
 		if len(Swap_1["name"])-len(Swap_a["name"])==1:
-			print Swap_1, Swap_a
+#			print Swap_1, Swap_a
 			Max_swap_a = int(max(Swap_a["place"]))
 			Min_swap_a = int(min(Swap_a["place"]))
 			added = 0
@@ -256,37 +256,37 @@ def find_second_swap(TopTable, Spriga, Sprigb, Name, compatibilitymatrix, Swap_1
 				if (Max_swap_a+1<27 and Max_swap_a+1>16) or Max_swap_a+1<=10:
 					if ((Max_swap_a+2<27 and Max_swap_a+2>16) or Max_swap_a+2<=10) and TopTable[Max_swap_a+2]!="X" and TopTable[Max_swap_a+1]!="X":
 						name_num_a=Name.index(TopTable[Max_swap_a+2])
-						print TopTable[Max_swap_a+2]
-						print compatibilitymatrix[TopTable[Max_swap_a+1]][name_num_a]
+#						print TopTable[Max_swap_a+2]
+#						print compatibilitymatrix[TopTable[Max_swap_a+1]][name_num_a]
 						if int(compatibilitymatrix[TopTable[Max_swap_a+1]][name_num_a])!=50:
-							print "entered here", compatibilitymatrix[TopTable[Max_swap_a+1]][name_num_a]
+#							print "entered here", compatibilitymatrix[TopTable[Max_swap_a+1]][name_num_a]
 							Swap_a["name"].append(TopTable[Max_swap_a+1])
 							Swap_a["table"].append("TT")
 							Swap_a["tableside"].append("TT")
 							Swap_a["place"].append(Max_swap_a+1)
 							added=added+1
 					else:
-						print "entered here", Max_swap_a+1
+#						print "entered here", Max_swap_a+1
 						Swap_a["name"].append(TopTable[Max_swap_a+1])
 						Swap_a["table"].append("TT")
 						Swap_a["tableside"].append("TT")
 						Swap_a["place"].append(Max_swap_a+1)
 						added=added+1
 				if added<1:
-					if (Min_swap_a-1>=0 and Min_swap_a-1<10) or Min_swap_a-1>=16:
-						if ((Min_swap_a-2>=0 and Min_swap_a-2<10) or Min_swap_a-2>=16) and TopTable[Min_swap_a-2]!="X" and TopTable[Min_swap_a-1]!="X":
+					if (Min_swap_a-1>=0 and Min_swap_a-1<10) or Min_swap_a-1>16:
+						if ((Min_swap_a-2>=0 and Min_swap_a-2<10) or Min_swap_a-2>16) and TopTable[Min_swap_a-2]!="X" and TopTable[Min_swap_a-1]!="X":
 							name_num_a=Name.index(TopTable[Min_swap_a-2])
-							print TopTable[Min_swap_a-2], TopTable[Min_swap_a-1]
-							print compatibilitymatrix[TopTable[Min_swap_a-1]][name_num_a]
+#							print TopTable[Min_swap_a-2], TopTable[Min_swap_a-1]
+#							print compatibilitymatrix[TopTable[Min_swap_a-1]][name_num_a]
 							if int(compatibilitymatrix[TopTable[Min_swap_a-1]][name_num_a])!=50:
-								print "entered here", compatibilitymatrix[TopTable[Min_swap_a-1]][name_num_a]
+#								print "entered here", compatibilitymatrix[TopTable[Min_swap_a-1]][name_num_a]
 								Swap_a["name"].append(TopTable[Min_swap_a-1])
 								Swap_a["table"].append("TT")
 								Swap_a["tableside"].append("TT")
 								Swap_a["place"].append(Min_swap_a-1)
 								added=added+1
 						else:
-							print "entered here", Min_swap_a-1
+#							print "entered here", Min_swap_a-1
 							Swap_a["name"].append(TopTable[Min_swap_a-1])
 							Swap_a["table"].append("TT")
 							Swap_a["tableside"].append("TT")
@@ -300,10 +300,10 @@ def find_second_swap(TopTable, Spriga, Sprigb, Name, compatibilitymatrix, Swap_1
 						if Max_swap_a+2<9 and Spriga[table][Max_swap_a+1]!="X" and Spriga[table][Max_swap_a+2]!="X" and Sprigb[table][Max_swap_a+1]!="X":
 							name_num_a=Name.index(Spriga[table][Max_swap_a+2])
 							name_num_b=Name.index(Sprigb[table][Max_swap_a+1])
-							print Spriga[table][Max_swap_a+2]
-							print int(compatibilitymatrix[Spriga[table][Max_swap_a+1]][name_num_a])
+#							print Spriga[table][Max_swap_a+2]
+#							print int(compatibilitymatrix[Spriga[table][Max_swap_a+1]][name_num_a])
 							if int(compatibilitymatrix[Spriga[table][Max_swap_a+1]][name_num_a])!=50 and int(compatibilitymatrix[Spriga[table][Max_swap_a+1]][name_num_b])!=50:
-								print "entered here", compatibilitymatrix[Spriga[table][Max_swap_a+1]][name_num_a]
+#								print "entered here", compatibilitymatrix[Spriga[table][Max_swap_a+1]][name_num_a]
 								Swap_a["name"].append(Spriga[table][Max_swap_a+1])
 								Swap_a["table"].append(table)
 								Swap_a["tableside"].append(tableside)
@@ -313,14 +313,14 @@ def find_second_swap(TopTable, Spriga, Sprigb, Name, compatibilitymatrix, Swap_1
 							if Sprigb[table][Max_swap_a+1]!="X" and Spriga[table][Max_swap_a+1]!="X":
 								name_num_b=Name.index(Sprigb[table][Max_swap_a+1])
 								if int(compatibilitymatrix[Spriga[table][Max_swap_a+1]][name_num_b])!=50:
-									print "2nd X a", Spriga[table][Max_swap_a+1], Sprigb[table][Max_swap_a+1]
+#									print "2nd X a", Spriga[table][Max_swap_a+1], Sprigb[table][Max_swap_a+1]
 									Swap_a["name"].append(Spriga[table][Max_swap_a+1])
 									Swap_a["table"].append(table)
 									Swap_a["tableside"].append(tableside)
 									Swap_a["place"].append(Max_swap_a+1)
 									added=added+1
 							else:
-								print "2nd X d", Spriga[table][Max_swap_a+1]
+#								print "2nd X d", Spriga[table][Max_swap_a+1]
 								Swap_a["name"].append(Spriga[table][Max_swap_a+1])
 								Swap_a["table"].append(table)
 								Swap_a["tableside"].append(tableside)
@@ -330,11 +330,11 @@ def find_second_swap(TopTable, Spriga, Sprigb, Name, compatibilitymatrix, Swap_1
 						if Max_swap_a+2-9<9 and Sprigb[table][Max_swap_a+1-9]!="X" and Sprigb[table][Max_swap_a+2-9]!="X" and Spriga[table][Max_swap_a+1-9]!="X":
 							name_num_a=Name.index(Sprigb[table][Max_swap_a+2-9])
 							name_num_b=Name.index(Spriga[table][Max_swap_a+1-9])
-							print Sprigb[table][Max_swap_a+2-9]
-							print int(compatibilitymatrix[Sprigb[table][Max_swap_a+1-9]][name_num_a])
+#							print Sprigb[table][Max_swap_a+2-9]
+#							print int(compatibilitymatrix[Sprigb[table][Max_swap_a+1-9]][name_num_a])
 							if int(compatibilitymatrix[Sprigb[table][Max_swap_a+1-9]][name_num_a])!=50 and int(compatibilitymatrix[Sprigb[table][Max_swap_a+1-9]][name_num_b])!=50:
-								print "entered here", compatibilitymatrix[Sprigb[table][Max_swap_a+1-9]][name_num_a]
-								print "tableside b", Sprigb[table]
+#								print "entered here", compatibilitymatrix[Sprigb[table][Max_swap_a+1-9]][name_num_a]
+#								print "tableside b", Sprigb[table]
 								Swap_a["name"].append(Sprigb[table][Max_swap_a+1-9])
 								Swap_a["table"].append(table)
 								Swap_a["tableside"].append(tableside)
@@ -344,14 +344,14 @@ def find_second_swap(TopTable, Spriga, Sprigb, Name, compatibilitymatrix, Swap_1
 							if Spriga[table][Max_swap_a+1-9]!="X":
 								name_num_b=Name.index(Spriga[table][Max_swap_a+1-9])
 								if int(compatibilitymatrix[Sprigb[table][Max_swap_a+1-9]][name_num_b])!=50:
-									print "2nd", Sprigb[table][Max_swap_a+1-9]
+#									print "2nd", Sprigb[table][Max_swap_a+1-9]
 									Swap_a["name"].append(Sprigb[table][Max_swap_a+1-9])
 									Swap_a["table"].append(table)
 									Swap_a["tableside"].append(tableside)
 									Swap_a["place"].append(Max_swap_a+1)
 									added=added+1
 							else:
-								print "2nd", Sprigb[table][Max_swap_a+1-9]
+#								print "2nd", Sprigb[table][Max_swap_a+1-9]
 								Swap_a["name"].append(Sprigb[table][Max_swap_a+1-9])
 								Swap_a["table"].append(table)
 								Swap_a["tableside"].append(tableside)
@@ -363,10 +363,10 @@ def find_second_swap(TopTable, Spriga, Sprigb, Name, compatibilitymatrix, Swap_1
 							if ((Min_swap_a-2>=0 and Min_swap_a-2<10) or Min_swap_a-2>16) and Spriga[table][Min_swap_a-1]!="X" and Spriga[table][Min_swap_a-2]!="X" and Sprigb[table][Min_swap_a-1]!="X":
 								name_num_a=Name.index(Spriga[table][Min_swap_a-2])
 								name_num_b=Name.index(Sprigb[table][Min_swap_a-1])
-								print Spriga[table][Min_swap_a-2]
-								print int(compatibilitymatrix[Spriga[table][Min_swap_a-1]][name_num_a])
+#								print Spriga[table][Min_swap_a-2]
+#								print int(compatibilitymatrix[Spriga[table][Min_swap_a-1]][name_num_a])
 								if int(compatibilitymatrix[Spriga[table][Min_swap_a-1]][name_num_a])!=50 and int(compatibilitymatrix[Spriga[table][Min_swap_a-1]][name_num_b])!=50:
-									print "entered here", compatibilitymatrix[Spriga[table][Min_swap_a-1]][name_num_a]
+#									print "entered here", compatibilitymatrix[Spriga[table][Min_swap_a-1]][name_num_a]
 									Swap_a["name"].append(Spriga[table][Min_swap_a-1])
 									Swap_a["table"].append(table)
 									Swap_a["tableside"].append(tableside)
@@ -376,14 +376,14 @@ def find_second_swap(TopTable, Spriga, Sprigb, Name, compatibilitymatrix, Swap_1
 								if Sprigb[table][Min_swap_a-1]!="X":
 									name_num_b=Name.index(Sprigb[table][Min_swap_a-1])
 									if int(compatibilitymatrix[Spriga[table][Min_swap_a-1]][name_num_b])!=50:
-										print "2nd", Spriga[table][Min_swap_a-1]
+#										print "2nd", Spriga[table][Min_swap_a-1]
 										Swap_a["name"].append(Spriga[table][Min_swap_a-1])
 										Swap_a["table"].append(table)
 										Swap_a["tableside"].append(tableside)
 										Swap_a["place"].append(Min_swap_a-1)
 										added=added+1
 								else:
-									print "2nd", Spriga[table][Min_swap_a-1]
+#									print "2nd", Spriga[table][Min_swap_a-1]
 									Swap_a["name"].append(Spriga[table][Min_swap_a-1])
 									Swap_a["table"].append(table)
 									Swap_a["tableside"].append(tableside)
@@ -393,11 +393,11 @@ def find_second_swap(TopTable, Spriga, Sprigb, Name, compatibilitymatrix, Swap_1
 							if Min_swap_a-2-9>=0 and Sprigb[table][Min_swap_a-1-9]!="X" and Sprigb[table][Min_swap_a-2-9]!="X" and Spriga[table][Min_swap_a-1-9]!="X":
 								name_num_a=Name.index(Sprigb[table][Min_swap_a-2-9])
 								name_num_b=Name.index(Spriga[table][Min_swap_a-1-9])
-								print Sprigb[table][Min_swap_a-2-9]
-								print int(compatibilitymatrix[Sprigb[table][Min_swap_a-1-9]][name_num_a])
+#								print Sprigb[table][Min_swap_a-2-9]
+#								print int(compatibilitymatrix[Sprigb[table][Min_swap_a-1-9]][name_num_a])
 								if int(compatibilitymatrix[Sprigb[table][Min_swap_a-1-9]][name_num_a])!=50 and int(compatibilitymatrix[Sprigb[table][Min_swap_a-1-9]][name_num_b])!=50:
-									print "entered here", compatibilitymatrix[Sprigb[table][Min_swap_a-1-9]][name_num_a]
-									print "minus 1 b", Sprigb[table]
+#									print "entered here", compatibilitymatrix[Sprigb[table][Min_swap_a-1-9]][name_num_a]
+#									print "minus 1 b", Sprigb[table]
 									Swap_a["name"].append(Sprigb[table][Min_swap_a-1-9])
 									Swap_a["table"].append(table)
 									Swap_a["tableside"].append(tableside)
@@ -407,7 +407,7 @@ def find_second_swap(TopTable, Spriga, Sprigb, Name, compatibilitymatrix, Swap_1
 								if Spriga[table][Min_swap_a-1-9]!="X" and Sprigb[table][Min_swap_a-1-9]!="X":
 									name_num_b=Name.index(Spriga[table][Min_swap_a-1-9])
 									if int(compatibilitymatrix[Sprigb[table][Min_swap_a-1-9]][name_num_b])!=50:
-										print "2nd", Spriga[table][Min_swap_a-1-9]
+#										print "2nd", Spriga[table][Min_swap_a-1-9]
 										Swap_a["name"].append(Sprigb[table][Min_swap_a-1-9])
 										Swap_a["table"].append(table)
 										Swap_a["tableside"].append(tableside)
@@ -416,22 +416,22 @@ def find_second_swap(TopTable, Spriga, Sprigb, Name, compatibilitymatrix, Swap_1
 								elif Min_swap_a-2-9>=0 and Spriga[table][Min_swap_a-1-9]=="X" and Sprigb[table][Min_swap_a-1-9]!="X" and Sprigb[table][Min_swap_a-2-9]!="X":
 									name_num_b=Name.index(Sprigb[table][Min_swap_a-2-9])
 									if int(compatibilitymatrix[Sprigb[table][Min_swap_a-1-9]][name_num_b])!=50:
-										print "2nd", Spriga[table][Min_swap_a-2-9]
+#										print "2nd", Spriga[table][Min_swap_a-2-9]
 										Swap_a["name"].append(Sprigb[table][Min_swap_a-1-9])
 										Swap_a["table"].append(table)
 										Swap_a["tableside"].append(tableside)
 										Swap_a["place"].append(Min_swap_a-1)
 										added=added+1
 								else:
-									print "2nd", Spriga[table][Min_swap_a-1-9]
+#									print "2nd", Spriga[table][Min_swap_a-1-9]
 									Swap_a["name"].append(Sprigb[table][Min_swap_a-1-9])
 									Swap_a["table"].append(table)
 									Swap_a["tableside"].append(tableside)
 									Swap_a["place"].append(Min_swap_a-1)
 									added=added+1
-		print len(Swap_1["name"]), len(Swap_a["name"])
+#		print len(Swap_1["name"]), len(Swap_a["name"])
 		if len(Swap_1["name"])==len(Swap_a["name"]):	
-			print Swap_1, Swap_a
+#			print Swap_1, Swap_a
 			foundmatch=True
 			
 	return Swap_a;
